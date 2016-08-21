@@ -13,6 +13,7 @@ public class Intcoll1
 
 	/**
 	 * Instantiates a Collection of Integers with a default length of 501
+	 * Note: The 0th index is 0
 	 */
 	public Intcoll1()
 	{
@@ -21,7 +22,8 @@ public class Intcoll1
 	}
 
 	/**
-	 * Instantiates a collection of Integers with a specified length
+	 * Instantiates a collection of Integers with a specified length + 1
+	 * Note: The 0th index is 0
 	 * @param i The length of the collection
 	 */
 	public Intcoll1(int i)
@@ -55,8 +57,8 @@ public class Intcoll1
 	 */
 	public boolean belongs(int i)
 	{
-		int j = 0;
-		while ((c[j] != 0)&&(c[j] != i)) j++;
+		int j = 0; //index variable
+		while ((c[j] != 0)&&(c[j] != i)) j++; //get to the correct j value
 		return ((i>0)&&(c[j] == i));
 	}
 
@@ -66,16 +68,26 @@ public class Intcoll1
 	 */
 	public void insert(int i)
 	{
-		if (i > 0)
+		if (i > 0) //its not zero, signifying the end
 		{
-			int j = 0;
-			while ((c[j] != 0) && (c[j] != i)) j++;
+			int j = 0; //index variable
+			while ((c[j] != 0) && (c[j] != i)) j++; //get to the correct j value
 			if (c[j] == 0)
 			{
-				if (j == c.length - 1)
+				if (j == c.length - 1) //if there are too many integers in the array
 				{
 
 					// ADD CODE HERE
+					//expand the length of the array by recreating the array and adding two to its length
+
+					int [] newC = new int[c.length + 1];
+
+					for(int k = 0; k < c.length; k ++){
+						newC[k] = c[k];
+					}
+
+					c = newC;
+
 				}
 				c[j] = i; c[j + 1] = 0;
 			}
@@ -91,7 +103,7 @@ public class Intcoll1
 		if (i>0)
 		{
 			int j = 0;
-			while ((c[j] != 0)&&(c[j] != i)) j++;
+			while ((c[j] != 0)&&(c[j] != i)) j++; //get to the correct j value
 			if (c[j] == i)
 			{
 				int k = j+1;
@@ -129,7 +141,7 @@ public class Intcoll1
 	/**
 	 * Compares two integer collection objects
 	 * @param obj The integer collection object
-	 * @return true if the collections have the same  
+	 * @return true if the collections have the same values in the collection (in no particular order)
 	 */
 	public boolean equals(Intcoll1 obj)
 	{
