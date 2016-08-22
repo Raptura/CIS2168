@@ -64,11 +64,12 @@ public class Intcoll1
 
 	/**
 	 * Inserts the integer into the collection
+	 * Note: Does not insert duplicate integers
 	 * @param i The integer
 	 */
 	public void insert(int i)
 	{
-		if (i > 0) //its not zero, signifying the end
+		if (i > 0)
 		{
 			int j = 0; //index variable
 			while ((c[j] != 0) && (c[j] != i)) j++; //get to the correct j value
@@ -95,7 +96,7 @@ public class Intcoll1
 	}
 
 	/**
-	 * Removes the integer from the collection
+	 * Removes the instance of an integer from the collection
 	 * @param i The integer
 	 */
 	public void omit(int i)
