@@ -40,7 +40,7 @@ public class Intcoll5 {
 	public boolean belongs(int i){
 		int index = 0;
 
-		while(c.get(index) != i && index < c.size() - 1)
+		while(c.get(index) != i && index < c.size())
 			index++;
 
 		return c.get(index) == i;
@@ -69,8 +69,9 @@ public class Intcoll5 {
 		if (i > 0 && c.size() > 0)
 		{
 			int index = 0;
-			while(c.get(index) != i && index < c.size() - 1)
-				index++;
+			while(c.get(index) != i && index < c.size()){
+				if(index < c.size() - 1) index++;
+			}
 
 			if(c.get(index) == i){
 				c.remove(index);

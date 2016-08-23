@@ -65,6 +65,9 @@ public class Intcoll3 {
 	 */
 	public boolean belongs(int i){
 
+		if(how_many == 0)
+			return false;
+
 		int j = 0; //index variable
 		while ((collection[j] != 0)&&(collection[j] != i)) j++; //get to the correct j value
 		return ((i>0)&&(collection[j] == i));
@@ -83,7 +86,7 @@ public class Intcoll3 {
 		{
 			int j = 0; //index variable
 			while ((collection[j] != 0) && (collection[j] != i)) j++; //get to the correct j value
-			if (j > how_many - 1)
+			if (j == how_many && collection[j] != i)
 			{
 				if (j == collection.length - 1) //if there are too many integers in the array
 				{

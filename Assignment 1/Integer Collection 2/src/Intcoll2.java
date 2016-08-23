@@ -57,6 +57,9 @@ public class Intcoll2 {
 	 */
 	public boolean belongs(int i){
 
+		if(how_many == 0)
+			return false;
+
 		int j = 0; //index variable
 		while ((c[j] != 0)&&(c[j] != i)) j++; //get to the correct j value
 		return ((i>0)&&(c[j] == i));
@@ -75,12 +78,10 @@ public class Intcoll2 {
 		{
 			int j = 0; //index variable
 			while ((c[j] != 0) && (c[j] != i)) j++; //get to the correct j value
-			if (j > how_many - 1)
+			if (j == how_many && c[j] != i)
 			{
 				if (j == c.length - 1) //if there are too many integers in the array
 				{
-
-					// ADD CODE HERE
 					//expand the length of the array by recreating the array and adding two to its length
 
 					int [] newC = new int[c.length + 1];

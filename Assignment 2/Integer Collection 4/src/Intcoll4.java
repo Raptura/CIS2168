@@ -61,8 +61,12 @@ public class Intcoll4 {
 	public boolean belongs(int i){
 		int index = 0;
 
-		while(c.get(index).info != i && index < how_many - 1)
-			index++;
+		if(how_many == 0)
+			return false;
+
+		while(c.get(index).info != i && (index < how_many)){
+			if (index < how_many) index++;
+		}
 
 		return c.get(index).info == i;
 	}
@@ -79,7 +83,7 @@ public class Intcoll4 {
 			ListNode newElement = new ListNode();
 			newElement.info = i; //puts the number into the info slot
 
-			if(c.size() > 0)
+			if(how_many > 0)
 				c.getLast().link = newElement; //links the last element to this new element
 
 			c.addLast(newElement); //adds the element to the list
@@ -96,17 +100,20 @@ public class Intcoll4 {
 		if (i > 0 && how_many > 0)
 		{
 			int index = 0;
-			while(c.get(index).info != i && index < how_many - 1)
-				index++;
+			while(c.get(index).info != i && (index < how_many)){
+				if (index < how_many) index++;
+			}
 
 			if(c.get(index).info == i){
 				c.remove(index);
 				how_many --;
 
-				if(c.getLast() != c.get(index))
-					c.get(index).link = c.get(index + 1); //replace the links
-				else
-					c.get(index).link = null; //null link if its last
+				if(how_many > 0){
+					if(c.getLast() != c.get(index))
+						c.get(index).link = c.get(index + 1); //replace the links
+					else
+						c.get(index).link = null; //null link if its last
+				}
 			}
 		}
 	}
