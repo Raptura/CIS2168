@@ -93,7 +93,7 @@ public class Intcoll3 {
 
 					int [] newCollection = new int[collection.length + 1];
 					boolean[] newC = new boolean[collection.length + 1];
-					
+
 					for(int k = 0; k < collection.length; k ++){
 						newCollection[k] = collection[k];
 					}
@@ -128,6 +128,8 @@ public class Intcoll3 {
 				c[j] = true; //Repetitive but, i wanted to ensure it stayed true
 				collection[k - 1] = 0;
 				c[k] = false;
+
+				how_many--;
 			}
 		}
 	}

@@ -101,6 +101,7 @@ public class Intcoll4 {
 
 			if(c.get(index).info == i){
 				c.remove(index);
+				how_many --;
 
 				if(c.getLast() != c.get(index))
 					c.get(index).link = c.get(index + 1); //replace the links

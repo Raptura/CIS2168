@@ -113,6 +113,7 @@ public class Intcoll2 {
 				int k = j+1;
 				while (c[k] != 0) k++;
 				c[j] = c[k-1]; c[k-1]=0;
+				how_many--;
 			}
 		}
 	}
