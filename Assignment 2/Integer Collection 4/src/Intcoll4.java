@@ -44,9 +44,10 @@ public class Intcoll4 {
 		{
 			c = new LinkedList<ListNode>();
 
-			for(int i = 0; i < obj.how_many; i++)
-			{
-				c.add(obj.c.get(i));
+			ListNode current = obj.c.peekFirst();
+			while(current != null){
+				c.add(current);
+				current = current.link;
 			}
 
 			how_many = obj.how_many;
@@ -59,16 +60,16 @@ public class Intcoll4 {
 	 * @return true if the integer belongs in the collection
 	 */
 	public boolean belongs(int i){
-		int index = 0;
-
 		if(how_many == 0)
 			return false;
 
-		while(c.get(index).info != i && (index < how_many)){
-			if (index < how_many) index++;
+		ListNode current = c.peekFirst();
+		while((current.link != null) && (current.info != i)){
+
+			current = current.link;
 		}
 
-		return c.get(index).info == i;
+		return current.info == i;
 	}
 
 	/**
@@ -78,15 +79,20 @@ public class Intcoll4 {
 	 */
 	public void insert(int i)
 	{
-		if (i > 0)
+		if (i > 0 && belongs(i) == false)
 		{
 			ListNode newElement = new ListNode();
 			newElement.info = i; //puts the number into the info slot
 
-			if(how_many > 0)
-				c.getLast().link = newElement; //links the last element to this new element
+			if(how_many > 0){
+				ListNode current = c.peekFirst();
+				while(current.link != null)
+					current = current.link;
 
-			c.addLast(newElement); //adds the element to the list
+				current.link = newElement; //links the last element to this new element
+			}
+
+			c.add(newElement); //adds the element to the list
 			how_many++;
 		}
 	}
@@ -99,21 +105,24 @@ public class Intcoll4 {
 	{
 		if (i > 0 && how_many > 0)
 		{
-			int index = 0;
-			while(c.get(index).info != i && (index < how_many)){
-				if (index < how_many) index++;
+			ListNode current = c.peekFirst();
+			while((current.link != null) && (current.info != i)){
+				current = current.link;
 			}
 
-			if(c.get(index).info == i){
-				c.remove(index);
-				how_many --;
+			if(current.info == i){
+				ListNode currentLink = current.link;
 
-				if(how_many > 0){
-					if(c.getLast() != c.get(index))
-						c.get(index).link = c.get(index + 1); //replace the links
-					else
-						c.get(index).link = null; //null link if its last
+				//Get the previous one		
+				ListNode previous = c.peekFirst();
+				while((previous.link != current) && (previous.link != null)){ //second check is just a safety check, its redundant
+					previous = previous.link;
 				}
+
+				previous.link = currentLink; //set the previous one to the current's link
+
+				c.remove(current); //actually remove it now
+				how_many --;
 			}
 		}
 	}
@@ -132,9 +141,13 @@ public class Intcoll4 {
 	public void print()
 	{
 		System.out.println();
-		for(int i = 0; i < how_many; i++){
-			System.out.println(c.get(i).info); i++;
+
+		ListNode current = c.peekFirst();
+		while(current != null){
+			System.out.println(current.info);
+			current = current.link;
 		}
+
 	}
 
 	/**
@@ -144,21 +157,23 @@ public class Intcoll4 {
 	 */
 	public boolean equals(Intcoll4 obj)
 	{
-		int j = 0;
-
 		//first check to see if they have the same number of integers
 		boolean result = (obj.how_many == how_many); 
 
-		while ( (j < how_many) && result)
+		//First object check
+		ListNode current = c.peekFirst();
+		while ((current != null) && result)
 		{
-			result = obj.belongs(c.get(j).info); 
-			j++;
+			result = obj.belongs(current.info); 
+			current = current.link;
 		}
-		j = 0;
-		while ( (j < how_many) &&result)
+
+		//Second object check
+		current = obj.c.peekFirst();
+		while ((current != null) && result)
 		{
-			result = belongs(obj.c.get(j).info); 
-			j++;
+			result = obj.belongs(current.info); 
+			current = current.link;
 		}
 		return result;
 	}
