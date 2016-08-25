@@ -7,7 +7,8 @@ public class Intcoll3 {
 
 
 	/**
-	 * 
+	 * The collections boolean counterpart
+	 * indicies that have true, are those that have integers in them
 	 */
 	private boolean[] c;
 
@@ -47,6 +48,7 @@ public class Intcoll3 {
 		if (this != obj)
 		{
 			collection = new int[obj.collection.length];
+			c = new boolean[obj.c.length];
 
 			for(int i = 0; i < obj.how_many; i++)
 			{
@@ -99,12 +101,15 @@ public class Intcoll3 {
 
 					for(int k = 0; k < collection.length; k ++){
 						newCollection[k] = collection[k];
+						newC[k] = c[k]; 
 					}
 
 					collection = newCollection;
+					c = newC;
 
 				}
 				collection[j] = i;
+				c[j] = true;
 				how_many++;
 			}
 		}
@@ -130,8 +135,7 @@ public class Intcoll3 {
 				collection[j] = collection[k-1]; 
 				c[j] = true; //Repetitive but, i wanted to ensure it stayed true
 				collection[k - 1] = 0;
-				c[k] = false;
-
+				c[k - 1] = false;
 				how_many--;
 			}
 		}

@@ -70,7 +70,7 @@ public class Intcoll2 {
 	/**
 	 * Inserts the integer into the collection
 	 * Note: Does not insert duplicate integers
-	 * @param i The integer
+	 * @param i The integer    
 	 */
 	public void insert(int i)
 	{
@@ -103,7 +103,7 @@ public class Intcoll2 {
 	 * Removes the instance of an integer from the collection
 	 * @param i The integer
 	 */
-	public void omit(int i)
+	public void omit(int i) 
 	{
 		if (i>0)
 		{
