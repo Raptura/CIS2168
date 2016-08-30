@@ -12,8 +12,7 @@ public class Intcoll1
 
 
 	/**
-	 * Instantiates a Collection of Integers with a default length of 501
-	 * Note: The 0th index is 0
+	 * Instantiates a Collection of Integers with a default capacity of 500
 	 */
 	public Intcoll1()
 	{
@@ -22,9 +21,8 @@ public class Intcoll1
 	}
 
 	/**
-	 * Instantiates a collection of Integers with a specified length + 1
-	 * Note: The 0th index is 0
-	 * @param i The length of the collection
+	 * Instantiates a collection of Integers with a specified capacity
+	 * @param i The capacity of the collection
 	 */
 	public Intcoll1(int i)
 	{
@@ -51,9 +49,9 @@ public class Intcoll1
 	}
 
 	/**
-	 * Checks to see if the integer belongs in the collection
+	 * Checks to see if the positive integer belongs in the collection
 	 * @param i The integer
-	 * @return true if the integer belongs in the collection
+	 * @return true if the integer belongs in the collection and is a positive value
 	 */
 	public boolean belongs(int i)
 	{
