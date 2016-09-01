@@ -77,7 +77,7 @@ public class Intcoll2 {
 		if (i > 0)
 		{
 			int j = 0; //index variable
-			while ((c[j] != 0) && (c[j] != i)) j++; //get to the correct j value
+			while ((j < how_many) && (c[j] != i)) j++; //get to the correct j value
 			if (j == how_many && c[j] != i)
 			{
 				if (j == c.length - 1) //if there are too many integers in the array
@@ -108,7 +108,7 @@ public class Intcoll2 {
 		if (i>0)
 		{
 			int j = 0;
-			while ((c[j] != 0)&&(c[j] != i)) j++; //get to the correct j value
+			while ((j < how_many )&&(c[j] != i)) j++; //get to the correct j value
 			if (c[j] == i)
 			{
 				int k = j+1;
@@ -153,11 +153,6 @@ public class Intcoll2 {
 		while ( (j < how_many) && result)
 		{
 			result = obj.belongs(c[j]); j++;
-		}
-		j = 0;
-		while ( (j < how_many) &&result)
-		{
-			result = belongs(obj.c[j]); j++;
 		}
 		return result;
 	}

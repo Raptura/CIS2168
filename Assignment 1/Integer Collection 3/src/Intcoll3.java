@@ -1,10 +1,5 @@
 
 public class Intcoll3 {
-	/**
-	 * @summary the collection of integers
-	 */
-	private int[] collection;
-
 
 	/**
 	 * The collections boolean counterpart
@@ -23,8 +18,10 @@ public class Intcoll3 {
 	 */
 	public Intcoll3()
 	{
-		collection = new int[500];
 		c = new boolean[500];
+		for(int i = 0; i < c.length; i++){
+			c[i] = false;
+		}
 		how_many = 0;
 	}
 
@@ -34,8 +31,10 @@ public class Intcoll3 {
 	 */
 	public Intcoll3(int i)
 	{
-		collection = new int[i];
 		c = new boolean[i];
+		for(int j = 0; j < c.length; j++){
+			c[j] = false;
+		}
 		how_many = 0;
 	}
 
@@ -47,12 +46,10 @@ public class Intcoll3 {
 	{
 		if (this != obj)
 		{
-			collection = new int[obj.collection.length];
 			c = new boolean[obj.c.length];
 
 			for(int i = 0; i < obj.how_many; i++)
 			{
-				collection[i] = obj.collection[i];
 				c[i] = obj.c[i];
 			}
 
@@ -70,10 +67,7 @@ public class Intcoll3 {
 		if(how_many == 0)
 			return false;
 
-		int j = 0; //index variable
-		while ((collection[j] != 0)&&(collection[j] != i)) j++; //get to the correct j value
-		return ((i>0)&&(collection[j] == i));
-
+		return (c[i]);
 
 	}
 
@@ -86,30 +80,8 @@ public class Intcoll3 {
 	{
 		if (i > 0)
 		{
-			int j = 0; //index variable
-			while ((collection[j] != 0) && (collection[j] != i)) j++; //get to the correct j value
-			if (j == how_many && collection[j] != i)
-			{
-				if (j == collection.length - 1) //if there are too many integers in the array
-				{
-
-					// ADD CODE HERE
-					//expand the length of the array by recreating the array and adding two to its length
-
-					int [] newCollection = new int[collection.length + 1];
-					boolean[] newC = new boolean[collection.length + 1];
-
-					for(int k = 0; k < collection.length; k ++){
-						newCollection[k] = collection[k];
-						newC[k] = c[k]; 
-					}
-
-					collection = newCollection;
-					c = newC;
-
-				}
-				collection[j] = i;
-				c[j] = true;
+			if(c[i] == false){
+				c[i] = true;
 				how_many++;
 			}
 		}
@@ -123,19 +95,9 @@ public class Intcoll3 {
 	{
 		if (i>0)
 		{
-			int j = 0; //indexer for omission
-			while ((collection[j] != 0) && (collection[j] != i)) j++; //get to the correct j value
-
-			if (collection[j] == i)
+			if (c[i] == true)
 			{
-				int k = j + 1; //indexer to replace
-				while (collection[k] != 0) 
-					k++; //get to the correct k value
-
-				collection[j] = collection[k-1]; 
-				c[j] = true; //Repetitive but, i wanted to ensure it stayed true
-				collection[k - 1] = 0;
-				c[k - 1] = false;
+				c[i] = false;
 				how_many--;
 			}
 		}
@@ -155,8 +117,9 @@ public class Intcoll3 {
 	public void print()
 	{
 		System.out.println();
-		for(int i = 0; i < how_many; i++){
-			System.out.println(collection[i]); i++;
+		for(int i = 0; i < c.length; i++){
+			if(c[i])
+				System.out.println(i);
 		}
 	}
 
@@ -172,14 +135,12 @@ public class Intcoll3 {
 		//first check to see if they have the same number of integers
 		boolean result = (obj.how_many == how_many); 
 
-		while ( (j < how_many) && result)
+		while ((j < c.length) && result)
 		{
-			result = obj.belongs(collection[j]); j++;
-		}
-		j = 0;
-		while ( (j < how_many) &&result)
-		{
-			result = belongs(obj.collection[j]); j++;
+			if(c[j])
+				result = obj.belongs(j); 
+
+			j++;
 		}
 		return result;
 	}
