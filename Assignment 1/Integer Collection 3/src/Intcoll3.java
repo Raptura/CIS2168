@@ -48,7 +48,7 @@ public class Intcoll3 {
 		{
 			c = new boolean[obj.c.length];
 
-			for(int i = 0; i < obj.how_many; i++)
+			for(int i = 0; i < obj.c.length; i++)
 			{
 				c[i] = obj.c[i];
 			}
@@ -67,7 +67,10 @@ public class Intcoll3 {
 		if(how_many == 0)
 			return false;
 
-		return (c[i]);
+		if(i < c.length)
+			return (c[i]);
+		else
+			return false;
 
 	}
 
@@ -80,10 +83,18 @@ public class Intcoll3 {
 	{
 		if (i > 0)
 		{
-			if(c[i] == false){
-				c[i] = true;
-				how_many++;
+			if(i < c.length){
+				if(c[i] == false){
+					c[i] = true;
+				}
+			}else{
+				boolean[] newC = new boolean[i * 2];
+				for(int j = 0; i < c.length; i++){
+					newC[j] = c[j];
+				}
+				c = newC;
 			}
+			how_many++;
 		}
 	}
 

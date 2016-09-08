@@ -12,12 +12,17 @@ public class Intcoll4 {
 		{
 			info=0; link = null;
 		}
+
+		public ListNode(int i, ListNode obj){
+			info = i;
+			link = obj;
+		}
 	}
 
 	/**
 	 * @summary the collection of integers
 	 */
-	private LinkedList<ListNode> c;
+	private ListNode c;
 
 	/**
 	 * how many items are in the collection
@@ -30,7 +35,21 @@ public class Intcoll4 {
 	 */
 	public Intcoll4()
 	{
-		c = new LinkedList<ListNode>();
+		c = new ListNode();
+		how_many = 0;
+	}
+
+	/**
+	 * Instantiates a Collection of Integers with specified length
+	 * @param i The specified length
+	 */
+	public Intcoll4(int i)
+	{
+		c = new ListNode();
+		for(int j = 0; j < i; j++){
+
+		}
+
 		how_many = 0;
 	}
 
@@ -42,12 +61,13 @@ public class Intcoll4 {
 	{
 		if (this != obj)
 		{
-			c = new LinkedList<ListNode>();
+			c = new ListNode(); //remake the head node
 
-			ListNode current = obj.c.peekFirst();
+			ListNode current = c;
+
 			while(current != null){
-				c.add(current);
 				current = current.link;
+				c.link = current;
 			}
 
 			how_many = obj.how_many;
@@ -63,7 +83,7 @@ public class Intcoll4 {
 		if(how_many == 0)
 			return false;
 
-		ListNode current = c.peekFirst();
+		ListNode current = c;
 		while((current.link != null) && (current.info != i)){
 
 			current = current.link;
@@ -81,18 +101,9 @@ public class Intcoll4 {
 	{
 		if (i > 0 && belongs(i) == false)
 		{
-			ListNode newElement = new ListNode();
-			newElement.info = i; //puts the number into the info slot
-
-			if(how_many > 0){
-				ListNode current = c.peekFirst();
-				while(current.link != null)
-					current = current.link;
-
-				current.link = newElement; //links the last element to this new element
-			}
-
-			c.add(newElement); //adds the element to the list
+			ListNode newElement = new ListNode(i, c);
+			c = newElement;
+			
 			how_many++;
 		}
 	}
@@ -105,23 +116,22 @@ public class Intcoll4 {
 	{
 		if (i > 0 && how_many > 0)
 		{
-			ListNode current = c.peekFirst();
+			ListNode current = c; //to be used when the integer is found
 			while((current.link != null) && (current.info != i)){
 				current = current.link;
 			}
 
-			if(current.info == i){
-				ListNode currentLink = current.link;
+			if(current.info == i){ //if it is found
+				ListNode currentLink = current.link; //even if it is null, its okay
 
 				//Get the previous one		
-				ListNode previous = c.peekFirst();
-				while((previous.link != current) && (previous.link != null)){ //second check is just a safety check, its redundant
+				ListNode previous = c;
+				while((previous.link != current)){
 					previous = previous.link;
 				}
 
 				previous.link = currentLink; //set the previous one to the current's link
 
-				c.remove(current); //actually remove it now
 				how_many --;
 			}
 		}
@@ -142,7 +152,7 @@ public class Intcoll4 {
 	{
 		System.out.println();
 
-		ListNode current = c.peekFirst();
+		ListNode current = c;
 		while(current != null){
 			System.out.println(current.info);
 			current = current.link;
@@ -161,7 +171,7 @@ public class Intcoll4 {
 		boolean result = (obj.how_many == how_many); 
 
 		//First object check
-		ListNode current = c.peekFirst();
+		ListNode current = c;
 		while ((current != null) && result)
 		{
 			result = obj.belongs(current.info); 
@@ -169,7 +179,7 @@ public class Intcoll4 {
 		}
 
 		//Second object check
-		current = obj.c.peekFirst();
+		current = obj.c;
 		while ((current != null) && result)
 		{
 			result = obj.belongs(current.info); 

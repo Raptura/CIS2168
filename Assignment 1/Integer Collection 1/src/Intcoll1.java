@@ -72,6 +72,7 @@ public class Intcoll1
 			int j = 0; //index variable
 			while ((c[j] != 0) && (c[j] != i)) j++; //get to the correct j value
 			if (c[j] == 0)
+				
 			{
 				if (j == c.length - 1) //if there are too many integers in the array
 				{
@@ -79,7 +80,7 @@ public class Intcoll1
 					// ADD CODE HERE
 					//expand the length of the array by recreating the array and adding two to its length
 
-					int [] newC = new int[c.length + 1];
+					int [] newC = new int[c.length * 2];
 
 					for(int k = 0; k < c.length; k ++){
 						newC[k] = c[k];
