@@ -14,7 +14,7 @@ public class Intcoll3 {
 
 
 	/**
-	 * Instantiates a Collection of Integers with a default length of 501
+	 * Instantiates a Collection of Positive  Integers with a default capacity of 500
 	 */
 	public Intcoll3()
 	{
@@ -26,7 +26,7 @@ public class Intcoll3 {
 	}
 
 	/**
-	 * Instantiates a collection of Integers with a specified length + 1
+	 * Instantiates a collection of Positive Integers with a default capacity of 500
 	 * @param i The length of the collection
 	 */
 	public Intcoll3(int i)
@@ -60,14 +60,14 @@ public class Intcoll3 {
 	/**
 	 * Checks to see if the integer belongs in the collection
 	 * @param i The integer
-	 * @return true if the integer belongs in the collection
+	 * @return true if the integer belongs in the collection and is a positive integer
 	 */
 	public boolean belongs(int i){
 
 		if(how_many == 0)
 			return false;
 
-		if(i < c.length)
+		if(i > 0 && i < c.length)
 			return (c[i]);
 		else
 			return false;

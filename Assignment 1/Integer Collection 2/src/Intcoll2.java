@@ -13,7 +13,7 @@ public class Intcoll2 {
 
 
 	/**
-	 * Instantiates a Collection of Integers with a default length of 501
+	 * Instantiates a Collection of Positive Integers with a default capacity of 500
 	 */
 	public Intcoll2()
 	{
@@ -22,8 +22,8 @@ public class Intcoll2 {
 	}
 
 	/**
-	 * Instantiates a collection of Integers with a specified length + 1
-	 * @param i The length of the collection
+	 * Instantiates a collection of Positive Integers with a specified capacity
+	 * @param i The capacity of the collection
 	 */
 	public Intcoll2(int i)
 	{
@@ -32,7 +32,7 @@ public class Intcoll2 {
 	}
 
 	/**
-	 * Copies the information from a new integer collection object into this object
+	 * Copies the information from a, existing integer collection object into this object
 	 * @param obj The integer collection object
 	 */
 	public void copy(Intcoll2 obj)
@@ -53,7 +53,7 @@ public class Intcoll2 {
 	/**
 	 * Checks to see if the integer belongs in the collection
 	 * @param i The integer
-	 * @return true if the integer belongs in the collection
+	 * @return true if the integer belongs in the collection and is a positive integer
 	 */
 	public boolean belongs(int i){
 

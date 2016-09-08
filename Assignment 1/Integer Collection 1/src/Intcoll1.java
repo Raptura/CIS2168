@@ -1,8 +1,3 @@
-//*********************************************************************
-// FILE NAME    : Intcoll1.java
-// DESCRIPTION  : This file contains the class Intcoll1.
-//*********************************************************************
-
 public class Intcoll1
 {
 	/**
@@ -12,7 +7,7 @@ public class Intcoll1
 
 
 	/**
-	 * Instantiates a Collection of Integers with a default capacity of 500
+	 * Instantiates a Collection of Positive Integers with a default capacity of 500
 	 */
 	public Intcoll1()
 	{
@@ -21,7 +16,7 @@ public class Intcoll1
 	}
 
 	/**
-	 * Instantiates a collection of Integers with a specified capacity
+	 * Instantiates a collection of Positive Integers with a specified capacity
 	 * @param i The capacity of the collection
 	 */
 	public Intcoll1(int i)
@@ -31,7 +26,7 @@ public class Intcoll1
 	}
 
 	/**
-	 * Copies the information from a new integer collection object into this object
+	 * Copies the information from an existing integer collection object into this object
 	 * @param obj The integer collection object
 	 */
 	public void copy(Intcoll1 obj)
@@ -114,7 +109,6 @@ public class Intcoll1
 	}
 
 	/**
-	 * 
 	 * @return How many integers there are in the collection
 	 */
 	public int get_howmany()
