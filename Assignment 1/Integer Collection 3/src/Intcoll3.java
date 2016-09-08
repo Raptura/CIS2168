@@ -83,17 +83,18 @@ public class Intcoll3 {
 	{
 		if (i > 0)
 		{
-			if(i < c.length){
-				if(c[i] == false){
-					c[i] = true;
-				}
-			}else{
+			if(i > c.length){
 				boolean[] newC = new boolean[i * 2];
-				for(int j = 0; i < c.length; i++){
+				for(int j = 0; j < c.length; j++){
 					newC[j] = c[j];
 				}
 				c = newC;
 			}
+			
+			if(c[i] == false){
+				c[i] = true;
+			}
+			
 			how_many++;
 		}
 	}
