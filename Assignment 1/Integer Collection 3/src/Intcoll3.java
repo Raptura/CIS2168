@@ -104,7 +104,7 @@ public class Intcoll3 {
 	 */
 	public void omit(int i)
 	{
-		if (i>0)
+		if (i>0 && i < c.length)
 		{
 			if (c[i] == true)
 			{

@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class Intcoll4 {
 
 	// The inner class for ListNode
@@ -20,7 +18,7 @@ public class Intcoll4 {
 	}
 
 	/**
-	 * @summary the collection of integers
+	 * @summary the collection of integers head node
 	 */
 	private ListNode c;
 
@@ -61,13 +59,19 @@ public class Intcoll4 {
 	{
 		if (this != obj)
 		{
-			c = new ListNode(); //remake the head node
+			c = new ListNode(); //re-make the head node
 
-			ListNode current = c;
+			ListNode currentFrom = obj.c; //the info we are currently copying
+			ListNode currentInto = null; //The object we are copying to
+			ListNode previous = c; //the previous element
 
-			while(current != null){
-				current = current.link;
-				c.link = current;
+			while(currentFrom != null){
+				currentInto = new ListNode(currentFrom.info, null);
+
+				previous.link = currentInto;
+
+				previous = currentInto;
+				currentFrom = currentFrom.link; //move to the next
 			}
 
 			how_many = obj.how_many;
@@ -103,7 +107,7 @@ public class Intcoll4 {
 		{
 			ListNode newElement = new ListNode(i, c);
 			c = newElement;
-			
+
 			how_many++;
 		}
 	}

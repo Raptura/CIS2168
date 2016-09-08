@@ -82,7 +82,7 @@ public class Intcoll2 {
 			{
 				if (j == c.length - 1) //if there are too many integers in the array
 				{
-					//expand the length of the array by recreating the array and adding two to its length
+					//expand the length of the array by recreating the array and adding  to its length
 
 					int [] newC = new int[c.length * 2];
 

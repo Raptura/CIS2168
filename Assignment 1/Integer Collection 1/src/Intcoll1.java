@@ -78,7 +78,7 @@ public class Intcoll1
 				{
 
 					// ADD CODE HERE
-					//expand the length of the array by recreating the array and adding two to its length
+					//expand the length of the array by recreating the array and adding to its length
 
 					int [] newC = new int[c.length * 2];
 
