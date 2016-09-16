@@ -6,7 +6,7 @@ public class Intcoll3client {
 	public static void main(String[] args)
 	{
 		int value; Scanner keyboard=new Scanner(System.in);
-		Intcoll3 P=new Intcoll3(), N=new Intcoll3(), L= new Intcoll3();
+		Intcoll3 P=new Intcoll3(2), N=new Intcoll3(2), L= new Intcoll3(2);
 
 		System.out.println("Enter an integer to be inserted or 0 to quit:");
 		value=keyboard.nextInt();

@@ -44,10 +44,6 @@ public class Intcoll4 {
 	public Intcoll4(int i)
 	{
 		c = new ListNode();
-		for(int j = 0; j < i; j++){
-
-		}
-
 		how_many = 0;
 	}
 
@@ -88,12 +84,15 @@ public class Intcoll4 {
 			return false;
 
 		ListNode current = c;
-		while((current.link != null) && (current.info != i)){
+		while((current != null) && (current.info != i)){
 
 			current = current.link;
 		}
 
-		return current.info == i;
+		if(current != null)
+			return current.info == i;
+		else
+			return false;
 	}
 
 	/**
@@ -121,22 +120,20 @@ public class Intcoll4 {
 		if (i > 0 && how_many > 0)
 		{
 			ListNode current = c; //to be used when the integer is found
-			while((current.link != null) && (current.info != i)){
+			ListNode previous = null;
+			while((current != null) && (current.info != i)){
+				previous = current;
 				current = current.link;
 			}
 
-			if(current.info == i){ //if it is found
-				ListNode currentLink = current.link; //even if it is null, its okay
-
-				//Get the previous one		
-				ListNode previous = c;
-				while((previous.link != current)){
-					previous = previous.link;
+			if(current != null ){
+				if(current.info == i){ //if it is found
+					if(previous != null)
+						previous.link = current.link; //even if it is null, its okay
+					else // if its the first element
+						c = current.link;
+					how_many --;
 				}
-
-				previous.link = currentLink; //set the previous one to the current's link
-
-				how_many --;
 			}
 		}
 	}
@@ -158,7 +155,9 @@ public class Intcoll4 {
 
 		ListNode current = c;
 		while(current != null){
-			System.out.println(current.info);
+			if(current.info != 0){
+				System.out.println(current.info);
+			}
 			current = current.link;
 		}
 

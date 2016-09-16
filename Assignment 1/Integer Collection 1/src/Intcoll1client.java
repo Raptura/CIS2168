@@ -13,7 +13,7 @@ public class Intcoll1client
 	public static void main(String[] args)
 	{
 		int value; Scanner keyboard=new Scanner(System.in);
-		Intcoll1 P=new Intcoll1(), N=new Intcoll1(), L= new Intcoll1();
+		Intcoll1 P=new Intcoll1(2), N=new Intcoll1(), L= new Intcoll1();
 
 		System.out.println("Enter an integer to be inserted or 0 to quit:");
 		value=keyboard.nextInt();
