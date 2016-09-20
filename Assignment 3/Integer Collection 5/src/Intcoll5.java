@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Intcoll5 {
 	/**
@@ -11,6 +12,13 @@ public class Intcoll5 {
 	 * Instantiates a Collection of Integers
 	 */
 	public Intcoll5()
+	{
+		c = new LinkedList<Integer>();
+	}
+	/**
+	 * @param i The length of the collection
+	 */
+	public Intcoll5(int i)
 	{
 		c = new LinkedList<Integer>();
 	}
@@ -63,14 +71,13 @@ public class Intcoll5 {
 	{
 		if (i > 0 && c.contains(i))
 		{
-			int index = 0;
-			while(c.get(index) != i && index < c.size()){
-				if(index < c.size() - 1) index++;
+			ListIterator<Integer> iterator = c.listIterator();
+			int current = 0;
+			while(iterator.hasNext() && current != i){
+				current = iterator.next();
 			}
-
-			if(c.get(index) == i){
-				c.remove(index);
-			}
+			if(current == i)
+				iterator.remove();
 		}
 	}
 
@@ -88,8 +95,9 @@ public class Intcoll5 {
 	public void print()
 	{
 		System.out.println();
-		for(int i = 0; i < c.size(); i++){
-			System.out.println(c.get(i)); i++;
+		ListIterator<Integer> iterator = c.listIterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
 		}
 	}
 
@@ -100,20 +108,16 @@ public class Intcoll5 {
 	 */
 	public boolean equals(Intcoll5 obj)
 	{
-		int j = 0;
 
 		//first check to see if they have the same number of integers
 		boolean result = (c.size() == obj.c.size()); 
 
-		while ( (j < c.size()) && result)
-		{
-			result = obj.belongs(c.get(j)); j++;
+		ListIterator<Integer> I1 = c.listIterator();
+
+		while(I1.hasNext() && result){
+			result = obj.c.contains(I1.next());
 		}
-		j = 0;
-		while ( (j < c.size()) &&result)
-		{
-			result = belongs(obj.c.get(j)); j++;
-		}
+
 		return result;
 	}
 }
