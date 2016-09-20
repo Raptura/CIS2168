@@ -38,12 +38,7 @@ public class Intcoll5 {
 	 * @return true if the integer belongs in the collection
 	 */
 	public boolean belongs(int i){
-		int index = 0;
-
-		while(c.get(index) != i && index < c.size())
-			index++;
-
-		return c.get(index) == i;
+		return c.contains(i);
 	}
 
 	/**
@@ -55,7 +50,7 @@ public class Intcoll5 {
 	{
 		if ((i>0)&&(!c.contains(i))) 
 		{  
-			c.addFirst(i);
+			c.add(i);
 		}
 	}      
 
@@ -66,7 +61,7 @@ public class Intcoll5 {
 	 */
 	public void omit(int i)
 	{
-		if (i > 0 && c.size() > 0)
+		if (i > 0 && c.contains(i))
 		{
 			int index = 0;
 			while(c.get(index) != i && index < c.size()){
