@@ -1,7 +1,3 @@
-import java.util.TreeMap;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Intcoll6 {
 
 
@@ -13,7 +9,7 @@ public class Intcoll6 {
 
 		public btNode()
 		{
-			info=0; left=right=null;
+			info=0; left= null; right=null;
 		}
 
 		public btNode(int i, btNode lt, btNode rt)
@@ -27,6 +23,7 @@ public class Intcoll6 {
 	/**
 	 * @summary the collection of integers
 	 */
+	private btNode c;
 
 	/**
 	 * How many elements are in the collection
@@ -40,7 +37,18 @@ public class Intcoll6 {
 	 */
 	public Intcoll6()
 	{
+		c = null;
+		how_many = 0;
+	}
 
+	/**
+	 * Instantiates a Collection of Integers
+	 * @param i The specified length
+	 */
+	public Intcoll6(int i)
+	{
+		c = null;
+		how_many = 0;
 	}
 
 	/** 
@@ -49,7 +57,24 @@ public class Intcoll6 {
 	 */
 	public void copy(Intcoll6 obj)
 	{
-		throw new NotImplementedException();
+		if (this!=obj)
+		{
+			how_many=obj.how_many;
+			c = copyTree(obj.c);  
+		}
+	}
+
+	private btNode copyTree(btNode t){
+		btNode root = null;
+
+		if(t != null){
+			root = new btNode();
+			root.info = t.info;
+			root.left = copyTree(t.left);
+			root.right = copyTree(t.right);
+		}
+
+		return root;
 	}
 
 	/**
@@ -58,7 +83,14 @@ public class Intcoll6 {
 	 * @return true if the integer belongs in the collection
 	 */
 	public boolean belongs(int i){
-		throw new NotImplementedException();
+		btNode p = c;
+		while((p != null) && (p.info != i)){
+			if(p.info > i)
+				p = p.left;
+			else
+				p = p.right;
+		}
+		return (p != null);
 	}
 
 	/**
@@ -68,7 +100,30 @@ public class Intcoll6 {
 	 */
 	public void insert(int i)
 	{
-		throw new NotImplementedException();
+		if(i > 0){
+			btNode pred = null;
+			btNode curr = c;
+
+			while((curr != null) && (curr.info != i)){
+				pred = curr;
+				if(curr.info > i)
+					curr = curr.left;
+				else
+					curr = curr.right;
+			}
+
+			if(curr == null){
+				how_many++;
+				curr = new btNode(i, null, null);
+				if(pred != null){
+					if(pred.info > i)
+						pred.left = curr;
+					else
+						pred.right = curr;
+				}else
+					c = curr;
+			}
+		}
 	}      
 
 
@@ -78,7 +133,55 @@ public class Intcoll6 {
 	 */
 	public void omit(int i)
 	{
-		throw new NotImplementedException();
+		if(i > 0){
+			btNode pred = null;
+			btNode curr = c;
+
+			while((curr != null) && (curr.info != i)){
+				pred = curr;
+				if(curr.info > i)
+					curr = curr.left;
+				else
+					curr = curr.right;
+			}
+
+			//iF its found
+			if(curr != null){
+				how_many--;
+
+				if(curr.left != null && curr.right != null){
+					if(pred != null){
+						btNode q = curr.right;
+
+						while(q.left != null){
+							q = q.left;
+							curr.info = q.info; //Get the minimum value
+						}
+						q = null;
+					}
+
+				}else if (curr.left != null){
+					btNode node = curr.left;
+					if(pred != null){
+						pred.left = node;
+						curr = null;
+					}else{
+						c = node;
+					}
+				}else if (curr.right != null){
+					btNode node = curr.right;
+					if(pred != null){
+						pred.right = node;
+						curr = null;
+					}else{
+						c = node;
+					}
+				}
+				else{
+					c = null;
+				}
+			}
+		}
 	}
 
 	/**
@@ -94,7 +197,26 @@ public class Intcoll6 {
 	 */
 	public void print()
 	{
-		throw new NotImplementedException();
+		printTree(c);
+	}
+
+	private void printTree(btNode tree){
+		if(tree != null){
+			printTree(tree.left);
+			System.out.println(tree.info);
+			printTree(tree.right);
+		}
+	}
+
+	private static int toArray(btNode tree, int[] a, int i){
+		int num_nodes = 0;
+		if(tree != null){
+			num_nodes = toArray(tree.left, a , i);
+			a[num_nodes + i] = tree.info;
+			num_nodes = num_nodes + 1 + toArray(tree.right, a, num_nodes + i + 1);
+		}
+		return num_nodes;
+
 	}
 
 	/**
@@ -104,6 +226,20 @@ public class Intcoll6 {
 	 */
 	public boolean equals(Intcoll6 obj)
 	{
-		throw new NotImplementedException();
+
+		boolean result = (how_many == obj.how_many);
+		int[] a1 = new int[how_many];
+		int[] a2 = new int[how_many];
+		toArray(c, a1, 0);
+		toArray(c, a2, 0);
+
+		int i = 0;
+		//They are in order, so it only makes sense to do it this way
+		while(result && i < how_many){
+			result = (a1[i] == a2[i]);
+			i++;
+		}
+
+		return result;
 	}
 }

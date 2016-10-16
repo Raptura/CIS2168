@@ -16,6 +16,7 @@ public class Intcoll5 {
 		c = new LinkedList<Integer>();
 	}
 	/**
+	 * Instantiates a Collection of Integers
 	 * @param i The length of the collection
 	 */
 	public Intcoll5(int i)
@@ -32,10 +33,9 @@ public class Intcoll5 {
 		if (this != obj)
 		{
 			c = new LinkedList<Integer>();
-
-			for(int i = 0; i < obj.c.size(); i++)
-			{
-				c.add(obj.c.get(i));
+			ListIterator<Integer> iterator = obj.c.listIterator();
+			while(iterator.hasNext()){
+				c.add(iterator.next().intValue());
 			}
 		}
 	}
@@ -74,7 +74,7 @@ public class Intcoll5 {
 			ListIterator<Integer> iterator = c.listIterator();
 			int current = 0;
 			while(iterator.hasNext() && current != i){
-				current = iterator.next();
+				current = iterator.next().intValue();
 			}
 			if(current == i)
 				iterator.remove();
@@ -97,7 +97,7 @@ public class Intcoll5 {
 		System.out.println();
 		ListIterator<Integer> iterator = c.listIterator();
 		while(iterator.hasNext()){
-			System.out.println(iterator.next());
+			System.out.println(iterator.next().intValue());
 		}
 	}
 
@@ -115,7 +115,7 @@ public class Intcoll5 {
 		ListIterator<Integer> I1 = c.listIterator();
 
 		while(I1.hasNext() && result){
-			result = obj.c.contains(I1.next());
+			result = obj.c.contains(I1.next().intValue());
 		}
 
 		return result;
