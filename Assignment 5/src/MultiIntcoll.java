@@ -1,15 +1,14 @@
-public class Intcoll6 {
-
+public class MultiIntcoll {
 
 	// The inner class for btNode
 	private static class btNode
 	{
-		private int info;
+		private int info, count;
 		private btNode left, right;
 
 		public btNode()
 		{
-			info=0; left= null; right=null;
+			info=0; count = 0; left= null; right=null;
 		}
 
 		public btNode(int i, btNode lt, btNode rt)
@@ -35,7 +34,7 @@ public class Intcoll6 {
 	/**
 	 * Instantiates a Collection of Integers
 	 */
-	public Intcoll6()
+	public MultiIntcoll()
 	{
 		c = null;
 		how_many = 0;
@@ -45,7 +44,7 @@ public class Intcoll6 {
 	 * Instantiates a Collection of Integers
 	 * @param i The specified length
 	 */
-	public Intcoll6(int i)
+	public MultiIntcoll(int i)
 	{
 		c = null;
 		how_many = 0;
@@ -55,7 +54,7 @@ public class Intcoll6 {
 	 * Copies the information from a new integer collection object into this object
 	 * @param obj The integer collection object
 	 */
-	public void copy(Intcoll6 obj)
+	public void copy(MultiIntcoll obj)
 	{
 		if (this!=obj)
 		{
@@ -70,6 +69,7 @@ public class Intcoll6 {
 		if(t != null){
 			root = new btNode();
 			root.info = t.info;
+			root.count = t.count;
 			root.left = copyTree(t.left);
 			root.right = copyTree(t.right);
 		}
@@ -112,8 +112,8 @@ public class Intcoll6 {
 					curr = curr.right;
 			}
 
+			how_many++;
 			if(curr == null){
-				how_many++;
 				curr = new btNode(i, null, null);
 				if(pred != null){
 					if(pred.info > i)
@@ -122,6 +122,10 @@ public class Intcoll6 {
 						pred.right = curr;
 				}else
 					c = curr;
+				
+				curr.count++;
+			}else{
+				curr.count++;
 			}
 		}
 	}      
@@ -148,70 +152,72 @@ public class Intcoll6 {
 			//iF its found
 			if(curr != null){
 				how_many--;
-
-
-				if(curr.left != null && curr.right != null){
-					btNode predq = curr;
-					btNode q = curr.right;
-					while(q.left != null){
-						predq = q;
-						q = q.left;
-					}
-					curr.info = q.info;
-
-					//Q can NEVER have a left subtree
-					//has a right subtree
-					if (q.right != null){
-						if(predq != curr)
-							predq.left = q.right;
-						else 
-							predq.right = q.right;
-						q = null;
-					}
-					else{ //Has no Subtrees
-						//if pred isnt the current
-						if(predq != curr)
-							predq.left = null;
-						q = null;
-							
-					}
-
-
-					//If there is a left
-				}else if (curr.left != null){
-					if(pred != null){
-						if(pred.left == curr)
-							pred.left = curr.left;
-						else
-							pred.right = curr.left;
-					}else
-						c = curr.left;
-
-					curr = null;
-					//has a right subtree
-				}else if (curr.right != null){
-					if(pred != null){
-						if(pred.right == curr)
-							pred.right = curr.right;
-						else
-							pred.left = curr.right;
-					}else
-						c = curr.right;
-
-					curr = null;
-				}
-				else{ //has no sub trees
-					if(pred != null){
-						if(pred.info > i){
-							pred.left = null;
-							curr = null;
+				curr.count --;
+				
+				if(curr.count == 0){
+					if(curr.left != null && curr.right != null){
+						btNode predq = curr;
+						btNode q = curr.right;
+						while(q.left != null){
+							predq = q;
+							q = q.left;
 						}
-						else{
-							pred.right = null;
-							curr = null;
+						curr.info = q.info;
+
+						//Q can NEVER have a left subtree
+						//has a right subtree
+						if (q.right != null){
+							if(predq != curr)
+								predq.left = q.right;
+							else 
+								predq.right = q.right;
+							q = null;
 						}
-					}else
-						c = null;
+						else{ //Has no Subtrees
+							//if pred isnt the current
+							if(predq != curr)
+								predq.left = null;
+							q = null;
+
+						}
+
+
+						//If there is a left
+					}else if (curr.left != null){
+						if(pred != null){
+							if(pred.left == curr)
+								pred.left = curr.left;
+							else
+								pred.right = curr.left;
+						}else
+							c = curr.left;
+
+						curr = null;
+						//has a right subtree
+					}else if (curr.right != null){
+						if(pred != null){
+							if(pred.right == curr)
+								pred.right = curr.right;
+							else
+								pred.left = curr.right;
+						}else
+							c = curr.right;
+
+						curr = null;
+					}
+					else{ //has no sub trees
+						if(pred != null){
+							if(pred.info > i){
+								pred.left = null;
+								curr = null;
+							}
+							else{
+								pred.right = null;
+								curr = null;
+							}
+						}else
+							c = null;
+					}
 				}
 			}
 		}
@@ -236,7 +242,7 @@ public class Intcoll6 {
 	private void printTree(btNode tree){
 		if(tree != null){
 			printTree(tree.left);
-			System.out.println(tree.info);
+			System.out.println(tree.info + " (" +tree.count + ")");
 			printTree(tree.right);
 		}
 	}
@@ -257,7 +263,7 @@ public class Intcoll6 {
 	 * @param obj The integer collection object
 	 * @return true if the collections have the same values in the collection (in no particular order)
 	 */
-	public boolean equals(Intcoll6 obj)
+	public boolean equals(MultiIntcoll obj)
 	{
 
 		boolean result = (how_many == obj.how_many);
