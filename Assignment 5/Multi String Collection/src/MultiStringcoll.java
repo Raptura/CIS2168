@@ -29,6 +29,11 @@ public class MultiStringcoll {
 	 * How many elements are in the collection
 	 */
 	private int how_many;
+	
+	/**
+	 * How many distinct strings in the collection
+	 */
+	private int total;
 
 
 
@@ -39,6 +44,7 @@ public class MultiStringcoll {
 	{
 		c = null;
 		how_many = 0;
+		total = 0;
 	}
 
 	/**
@@ -49,6 +55,7 @@ public class MultiStringcoll {
 	{
 		c = null;
 		how_many = 0;
+		total = 0;
 	}
 
 	/** 
@@ -60,6 +67,7 @@ public class MultiStringcoll {
 		if (this!=obj)
 		{
 			how_many=obj.how_many;
+			total = obj.total;
 			c = copyTree(obj.c);  
 		}
 	}
@@ -83,7 +91,7 @@ public class MultiStringcoll {
 	 * @param i The integer
 	 * @return true if the integer belongs in the collection
 	 */
-	public boolean belongs(String i){
+	public int belongs(String i){
 		btNode p = c;
 		while((p != null) && (!p.info.equals(i))){
 			if(p.info.compareTo(i) > 0)
@@ -91,7 +99,10 @@ public class MultiStringcoll {
 			else
 				p = p.right;
 		}
-		return (p != null);
+		if(p != null)
+			return p.count;
+		else
+			return 0;
 	}
 
 	/**
@@ -125,6 +136,7 @@ public class MultiStringcoll {
 					c = curr;
 
 				curr.count++;
+				total ++;
 			}else{
 				curr.count++;
 			}
@@ -156,6 +168,7 @@ public class MultiStringcoll {
 				curr.count --;
 
 				if(curr.count == 0){
+					total --;
 					if(curr.left != null && curr.right != null){
 						btNode predq = curr;
 						btNode q = curr.right;
@@ -225,11 +238,19 @@ public class MultiStringcoll {
 	}
 
 	/**
-	 * @return How many integers there are in the collection
+	 * @return How many Strings there are in the collection
 	 */
 	public int get_howmany()
 	{
 		return how_many;
+	}
+	
+	/**
+	 * 
+	 * @return How many distinct Strings there are in the collection 
+	 */
+	public int get_total(){
+		return total;
 	}
 
 	/**
@@ -238,6 +259,8 @@ public class MultiStringcoll {
 	public void print()
 	{
 		printTree(c);
+		System.out.println("The total Number of Strings is " +how_many);
+		System.out.println("The amount of Distinct Strings is " +total);
 	}
 
 	private void printTree(btNode tree){
@@ -251,7 +274,7 @@ public class MultiStringcoll {
 	private static int toArray(btNode tree, String[] a, int i){
 		int num_nodes = 0;
 		if(tree != null){
-			num_nodes = toArray(tree.left, a , i);
+			num_nodes = toArray(tree.left, a, i);
 			a[num_nodes + i] = tree.info;
 			num_nodes = num_nodes + 1 + toArray(tree.right, a, num_nodes + i + 1);
 		}
@@ -268,15 +291,17 @@ public class MultiStringcoll {
 	{
 
 		boolean result = (how_many == obj.how_many);
-		String[] a1 = new String[how_many];
-		String[] a2 = new String[how_many];
+		result = (total == obj.total);
+		
+		String[] a1 = new String[total];
+		String[] a2 = new String[obj.total];
 		toArray(c, a1, 0);
-		toArray(c, a2, 0);
+		toArray(obj.c, a2, 0);
 
 		int i = 0;
 		//They are in order, so it only makes sense to do it this way
-		while(result && i < how_many){
-			result = (a1[i] == a2[i]);
+		while(result && i < total){
+			result = (a1[i].equals(a2[i])) && (belongs(a1[i]) == obj.belongs(a2[i]));
 			i++;
 		}
 
